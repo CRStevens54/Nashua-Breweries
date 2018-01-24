@@ -1,0 +1,38 @@
+---
+title: "R Markdown Leaflet Stevens Project"
+author: "Chad Stevens"
+date: "January 24, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Breweries in Greater Nashua,NH
+This website shows where all the breweries are in Nashua, NH
+
+```{r, comment="", warning=FALSE,message=FALSE}
+library(leaflet)
+NashBrews <- data.frame(name = c("Millyard Brewery", "Martha's Exchange", "Djinn Spirits Craft Distillery", "Anheuser-Busch", "Able Ebenezer Brewing Company"),
+                        latitude = c(42.754440,42.760417,42.788841,42.825359,42.852632),
+                        longitude = c(-71.459794,-71.465479,-71.516457,-71.486454,-71.492993))
+BrewIcon <- makeIcon("C:/Users/SteveC13/Pictures/beer.png",
+                        iconWidth = 31*215/230, iconHeight = 31,
+                        iconAnchorX = 31*215/230/2, iconAnchorY = 16
+                        )
+marker.url = 
+BrewerySites <- c(
+  "<a href='http://www.millyardbrewery.com/'>Millyard Brewery</a>",
+  "<a href='http://www.marthas-exchange.com/'>Marthas Exchange</a>",
+  "<a href='https://www.djinnspirits.com/'>Djinn Spirits</a>",
+  "<a href='http://www.budweisertours.com/'>Budweiser Tours</a>",
+  "<a href='http://www.ableebenezer.com/'>Able Ebenezer</a>")
+
+
+
+NashBrews %>%
+  leaflet()%>%
+  addTiles()%>%
+  addMarkers(icon=BrewIcon, popup = BrewerySites)
+```
